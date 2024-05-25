@@ -117,9 +117,9 @@ wget https://raw.githubusercontent.com/lotrando/realist-hyprland-desktop/main/ma
 ```
 
 ```
-# RXMD - Realist Xmonad Minimal Desktop - make.conf file (c) 2024 -> /etc/portage/make.conf
+# RWS - Realist Webserver - make.conf file (c) 2024 -> /etc/portage/make.conf
 
-USE="dbus elogind pipewire nls vulkan wayland"
+USE="nls"
 CPU_FLAGS_X86="aes avx avx2 f16c fma3 mmx mmxext pclmul popcnt rdrand sse sse2 sse3 sse4_1 sse4_2 ssse3"
 
 COMMON_FLAGS="-O2 -pipe -fomit-frame-pointer"
@@ -130,7 +130,7 @@ FFLAGS="${COMMON_FLAGS}"
 MAKE_OPTS="-j6"
 
 GENTOO_MIRRORS="https://mirror.dkm.cz/gentoo/"
-PORTAGE_BINHOST="http://94.113.201.164:55/hyprland"
+PORTAGE_BINHOST=""
 PORTDIR="/var/db/repos/gentoo"
 DISTDIR="/var/cache/distfiles"
 PKGDIR="/var/cache/binpkgs"
@@ -158,34 +158,7 @@ wget https://raw.githubusercontent.com/lotrando/realist-hyprland-desktop/main/pa
 ```
 
 ```
-# RHMD - Realist Hyprland Minimal Desktop - package.accept_keywords file -> /etc/portage/package.accept_keywords
-
-# APP-EDITORS
-app-editors/sublime-text ~amd64
-
-# APP-MISC
-app-misc/nwg-look ~amd64
-
-# DEV-CPP
-dev-cpp/sdbus-c++ ~amd64
-
-# GUI-APPS
-gui-apps/hypridle ~amd64
-gui-apps/hyprlock ~amd64
-gui-apps/hyprpaper ~amd64
-gui-apps/hyprpicker ~amd64
-gui-apps/rofi-wayland ~amd64
-gui-apps/waybar ~amd64
-gui-apps/wlr-randr ~amd64
-
-# GUI-LIBS
-gui-libs/xdg-desktop-portal-hyprland ~amd64
-
-# GUI-WM
-gui-wm/hyprland-contrib ~amd64
-
-# APP-MISC ! important
-app-misc/ca-certificates ~amd64
+# RWS - Realist Webserver - package.accept_keywords file -> /etc/portage/package.accept_keywords
 
 # SYS-KERNEL ! important
 sys-kernel/zen-sources ~amd64
@@ -195,18 +168,8 @@ app-shells/oh-my-zsh ~amd64
 app-shells/zsh-autosuggestions ~amd64
 app-shells/zsh-syntax-highlighting ~amd64
 
-# MEDIA-VIDEO ! important
-media-video/pipewire ~amd64
-media-video/wireplumber ~amd64
-
 # SYS-APSS
 sys-apps/eza ~amd64
-
-# X11-APPS - nwg-look
-x11-apps/xcur2png ~amd64
-
-# X11-THEMES - nwg-look
-x11-themes/elementary-xfce-icon-theme ~amd64
 ```
 
 ### File - /etc/portage/package.use
@@ -216,49 +179,16 @@ wget https://raw.githubusercontent.com/lotrando/realist-hyprland-desktop/main/pa
 ```
 
 ```
-# RHMD - Realist Hyprland Minimal Desktop - package.use file -> /etc/portage/package.use
+# RWS - Realist Webserver - package.use file -> /etc/portage/package.use
 
 # APP-MISC
 app-misc/mc nls -slang unicode gpm sftp
 
-# DEV-LIBS
-dev-libs/libdbusmenu gtk3
-
-# DEV-QT
-dev-qt/qtgui egl
-
 # DEV-VCS
 dev-vcs/git -perl
 
-# GUI-APPS
-gui-apps/rofi-wayland drun windowmode
-gui-apps/waybar pulseaudio udev network tray upower wifi
-
-# GUI-LIBS
-gui-libs/wlroots x11-backend X
-
-# GUI-WM
-gui-wm/hyprland X
-
 # MEDIA-FONTS
 media-fonts/terminus-font -ru-g
-
-# MEDIA-LIBS
-media-libs/libsdl2 gles2
-media-libs/libglvnd
-media-libs/vulkan-loader
-
-# MEDIA-PLUGINS
-media-plugins/audacious-plugins nls pipewire cdda cue ffmpeg flac http lame libnotify modplug mp3 opus sndfile wavpack
-
-# MEDIA-SOUND
-media-sound/pulseaudio alsa-plugin -bluetooth -daemon
-
-# MEDIA-VIDEO
-media-video/pipewire sound-server v4l -bluetooth
-media-video/ffmpeg mp3 v4l webp
-media-video/mpv cdda dvd jpeg
-media-video/ffmpeg bzip2 dav1d encode gnutls gpl iconv mp3 network pic postproc threads v4l vulkan webp zlib modplug opus svg x264 x265 xvid
 
 # SYS-BOOT
 sys-boot/grub mount
@@ -266,43 +196,16 @@ sys-boot/grub mount
 # SYS-KERNEL
 sys-kernel/linux-firmware initramfs
 sys-kernel/zen-sources symlink
-
-# X11-LIBS
-x11-libs/libdrm video_cards_radeon
-
-#media-libs/freetype -X
-#app-misc/mc -X
-#media-fonts/liberation-fonts -X
-#media-fonts/terminus-font -X
-#media-fonts/ubuntu-font-family -X
-#media-video/pipewire -X
-#media-libs/libpulse -X
-
-dev-cpp/cairomm X
-dev-cpp/gtkmm X
-
-x11-libs/cairo X
-x11-libs/gtk+ X
-
-dev-qt/qtbase opengl
-dev-qt/qttools opengl
-
-app-crypt/pinentry X
-sys-apps/dbus X
 ```
 
 ### Edit file - /etc/portage/package.license
 
 ```
-wget https://raw.githubusercontent.com/lotrando/realist-hyprland-desktop/main/package.license
+wget https://raw.githubusercontent.com/lotrando/gentoo-webserver/main/package.license
 ```
 
 ```
-# RHMD - Realist Hyprland Minimal Desktop - package.license file -> /etc/portage/package.license
-
-# APP-EDITORS
-app-editors/vscode Microsoft-vscode
-app-editors/sublime-text Sublime
+# RWS - Realist Webserver - package.license file -> /etc/portage/package.license
 
 # SYS-KERNEL
 sys-kernel/linux-firmware linux-fw-redistributable no-source-code
@@ -430,7 +333,7 @@ emerge gcc python rust clang
 ### Create zen-kernel and install important system packages 
 59 packages
 ```
-emerge seatd dhcpcd grub terminus-font sudo f2fs-tools dev-vcs/git eselect-repository genkernel linux-firmware zen-sources --noreplace nano && genkernel all
+emerge dhcpcd grub terminus-font sudo f2fs-tools dev-vcs/git eselect-repository genkernel linux-firmware zen-sources --noreplace nano && genkernel all
 ```
 
 ### Create user (replace realist and toor with custom user and password)
@@ -466,17 +369,6 @@ git clone https://github.com/zsh-users/zsh-autosuggestions.git /usr/share/zsh/si
 ```
 ```
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /usr/share/zsh/site-contrib/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
-```
-
-## Desktop
-```
-eselect repository enable guru && emaint sync -r guru
-```
-```
-emerge hyprland hyprpaper hyprpicker hyprland-contrib xdg-desktop-portal-hyprland waybar xwayland
-```
-```
-emerge grim slurp neofetch eix gentoolkit kitty imagemagick ubuntu-font-family gnome-themes-standard elementary-xfce-icon-theme rofi-wayland qt5ct adwaita-qt pipewire firefox-bin mpv audacious nwg-look pulsemixer
 ```
 
 ### Install WEB developers packages ( optional )
