@@ -2,11 +2,6 @@
 
 ## About this project
 
-
-## Final desktop - One monitor screenshot
-
-<img src="" alt="One Monitor Screenshot" />
-
 ## Create install environment
 
 ### Partitions
